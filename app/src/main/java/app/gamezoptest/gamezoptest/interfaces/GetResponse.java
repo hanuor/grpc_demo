@@ -1,4 +1,4 @@
-package app.gamezoptest.gamezoptest;
+package app.gamezoptest.gamezoptest.interfaces;
 /*
  * Created by Han
  *Vamos!

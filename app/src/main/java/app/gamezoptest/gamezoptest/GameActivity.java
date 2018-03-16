@@ -30,6 +30,7 @@ import app.gamezoptest.gamezoptest.Models.AdapterModel;
 import app.gamezoptest.gamezoptest.Utils.DownloadZipTask;
 import app.gamezoptest.gamezoptest.Utils.UnzipTask;
 import app.gamezoptest.gamezoptest.adapters.ImageAdapter;
+import app.gamezoptest.gamezoptest.interfaces.GetResponse;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
