@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import app.gamezoptest.gamezoptest.Models.AdapterModel;
+import app.gamezoptest.gamezoptest.Utils.Constants;
 import app.gamezoptest.gamezoptest.Utils.DownloadZipTask;
 import app.gamezoptest.gamezoptest.Utils.UnzipTask;
 import app.gamezoptest.gamezoptest.adapters.ImageAdapter;
@@ -83,7 +84,7 @@ public class GameActivity extends AppCompatActivity implements AbsListView.OnScr
         String zipUrl = hashMap.get(i);
         DownloadZipTask download = new DownloadZipTask("/gamezop/" + i + ".zip", this, new DownloadZipTask.PostDownload(){
             @Override
-            public void downloadDone(File file) {
+            public void downloadFinish(File file) {
 
                 // check unzip file now
                 UnzipTask unzip = new UnzipTask(GameActivity.this, file);
@@ -124,8 +125,8 @@ public class GameActivity extends AppCompatActivity implements AbsListView.OnScr
 
         @Override
         protected GamesResponse doInBackground(String... params) {
-            String host = "ben.gamezop.io";
-            String portStr = "50051";
+            String host = Constants.host;
+            String portStr = Constants.port;
             int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
             try {
                 channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext(true).build();

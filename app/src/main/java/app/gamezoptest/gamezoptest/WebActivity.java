@@ -7,7 +7,6 @@ package app.gamezoptest.gamezoptest;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
-import java.io.File;
+import app.gamezoptest.gamezoptest.Utils.Constants;
 
 public class WebActivity extends AppCompatActivity {
 
@@ -39,7 +38,7 @@ public class WebActivity extends AppCompatActivity {
         webView.getSettings().setAllowContentAccess(true);
 
         webView.getSettings().setPluginState(WebSettings.PluginState.ON);
-        webView.loadUrl("file:///" + Environment.getExternalStorageDirectory().toString() + File.separator + getPath + "index.html");
+        webView.loadUrl(Constants.pathToFile + getPath + "index.html");
         GameActivity.progress.dismiss();
 
     }
@@ -47,12 +46,12 @@ public class WebActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        finish();
+        this.finish();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
+        this.finish();
     }
 }

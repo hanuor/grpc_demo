@@ -8,7 +8,6 @@ package app.gamezoptest.gamezoptest.Utils;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -49,8 +48,6 @@ public class DownloadZipTask extends AsyncTask<String, String, String> {
             connection.connect();
 
             int lenghtOfFile = connection.getContentLength();
-            Log.d(TAG, "Length of the file: " + lenghtOfFile);
-
             InputStream input = new BufferedInputStream(url.openStream());
             String root = Environment.getExternalStorageDirectory().toString();
             File myDir = new File(root + "/gamezoptest/");
@@ -60,8 +57,7 @@ public class DownloadZipTask extends AsyncTask<String, String, String> {
             file = new File(myDir, downloadLocation);
             if (file.exists ()) file.delete ();
             file.getParentFile().mkdirs();
-            FileOutputStream output = new FileOutputStream(file); //context.openFileOutput("content.zip", Context.MODE_PRIVATE);
-            Log.d(TAG, "file saved at " + file.getAbsolutePath());
+            FileOutputStream output = new FileOutputStream(file);
             fd = output.getFD();
 
             byte data[] = new byte[1024];
@@ -80,15 +76,15 @@ public class DownloadZipTask extends AsyncTask<String, String, String> {
 
     }
     protected void onProgressUpdate(String... progress) {
-        //Log.d(TAG,progress[0]);
+
     }
 
     @Override
     protected void onPostExecute(String unused) {
-        if(callback != null) callback.downloadDone(file);
+        if(callback != null) callback.downloadFinish(file);
     }
 
     public static interface PostDownload{
-        void downloadDone(File fd);
+        void downloadFinish(File fDownload);
     }
 }
