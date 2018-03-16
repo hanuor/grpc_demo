@@ -81,6 +81,7 @@ public class GameActivity extends AppCompatActivity implements AbsListView.OnScr
         progress.setMessage("Loading game. Sit tight ;)");
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setIndeterminate(true);
+        progress.setCancelable(false);
         progress.show();
         String zipUrl = hashMap.get(i);
         DownloadZipTask download = new DownloadZipTask("/gamezop/" + i + ".zip", this, new DownloadZipTask.PostDownload() {
