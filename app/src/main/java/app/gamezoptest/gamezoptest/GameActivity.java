@@ -42,6 +42,7 @@ public class GameActivity extends AppCompatActivity implements AbsListView.OnScr
     GrpcTask grpcTask = null;
     public static ProgressDialog progress = null;
     HashMap<Integer, String> hashMap = new HashMap<Integer, String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +83,7 @@ public class GameActivity extends AppCompatActivity implements AbsListView.OnScr
         progress.setIndeterminate(true);
         progress.show();
         String zipUrl = hashMap.get(i);
-        DownloadZipTask download = new DownloadZipTask("/gamezop/" + i + ".zip", this, new DownloadZipTask.PostDownload(){
+        DownloadZipTask download = new DownloadZipTask("/gamezop/" + i + ".zip", this, new DownloadZipTask.PostDownload() {
             @Override
             public void downloadFinish(File file) {
 
@@ -153,7 +154,7 @@ public class GameActivity extends AppCompatActivity implements AbsListView.OnScr
             ArrayList<AdapterModel> getImagesURLfromResult = new ArrayList<AdapterModel>();
             HashMap<Integer, String> makeMap = new HashMap<>();
             for (int i = 0; i < result.getGamesCount(); i++) {
-                getImagesURLfromResult.add(new AdapterModel(result.getGames(i).getName(),result.getGames(i).getCover()));
+                getImagesURLfromResult.add(new AdapterModel(result.getGames(i).getName(), result.getGames(i).getCover()));
                 makeMap.put(i, result.getGames(i).getZipUrl());
 
             }
@@ -170,4 +171,9 @@ public class GameActivity extends AppCompatActivity implements AbsListView.OnScr
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.finish();
+    }
 }
